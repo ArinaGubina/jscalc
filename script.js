@@ -21,7 +21,7 @@ let appData = {
     'deposit' : false,
     'mission' : 1000000,
     'period' : 12,
-    'asking' : function(){
+    asking : function(){
     let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', '');            
             appData.addExpenses = addExpenses.toLocaleLowerCase().split(',');
             appData.deposit = confirm('Есть ли у вас депозит в банке?');
@@ -39,7 +39,17 @@ let appData = {
     },
     'budgetDay' : 0,
     'budgetMonth' : 0,
-    'expensesMonth' : 0
+    'expensesMonth' : 0,
+    getExpensesMonth : function(){
+        for (let i = 0; i < appData.addExpenses.length; i++) {
+            console.log(appData.addExpenses[i]);
+        }
+    },
+    getAccumulatedMonth : function(){
+        for (const key in appData.expenses) {
+            appData.expensesMonth += appData.expenses[key];
+        }
+    }
 };
 
 start();
@@ -51,14 +61,8 @@ console.log(appData.addExpenses.length);
 console.log('Период равен ' + appData.period + ' месяцев');
 console.log('Цель заработать ' + appData.mission + ' рублей');
 
-
-for (let i = 0; i < appData.addExpenses.length; i++) {
-    console.log(appData.addExpenses[i]);
-}
-
-for (const key in appData.expenses) {
-    appData.expensesMonth += appData.expenses[key];
-}
+appData.getExpensesMonth();
+appData.getAccumulatedMonth();
 
 function getBudget() {
     appData.budgetMonth = appData.budget - appData.expensesMonth;
