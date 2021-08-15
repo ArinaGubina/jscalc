@@ -64,6 +64,9 @@ let appData = {
         } else {
             return 'Что то пошло не так';
         }
+    },
+    getTargetMonth : function() {
+        return Math.ceil(appData.mission/appData.budgetMonth);
     }
 };
 
@@ -79,16 +82,11 @@ appData.getExpensesMonth();
 appData.getAccumulatedMonth();
 appData.getBudget();
 
-function getTargetMonth() {
-    return Math.ceil(appData.mission/appData.budgetMonth);
-}
-
 console.log('Бюджет на месяц: ' + appData.budgetMonth);
 console.log('Бюджет на день: ' + appData.budgetDay);
 
-let realPeriod = getTargetMonth();
-if (realPeriod >= 0) {
-    console.log('Цель будет достигнута за ' + realPeriod + ' месяцев');
+if (appData.getTargetMonth() >= 0) {
+    console.log('Цель будет достигнута за ' + appData.getTargetMonth() + ' месяцев');
 } else {
     console.log('Цель не будет достигнута');
 }
