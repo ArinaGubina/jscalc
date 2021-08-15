@@ -4,74 +4,75 @@ let isNumber = function(n) {
     return !isNaN( parseFloat(n) ) && isFinite(n);
 };
 
-let money = 0,
-    income = 'репетиторство',
-    addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', ''),
-    deposit = confirm('Есть ли у вас депозит в банке?'),
-    mission = 1000000,
-    period = 12;
-
-console.log(addExpenses.length);
-console.log('Период равен ' + period + ' месяцев');
-console.log('Цель заработать ' + mission + ' рублей');
-
-addExpenses = addExpenses.toLocaleLowerCase();
-addExpenses = addExpenses.split(',');
-for (let i = 0; i < addExpenses.length; i++) {
-    console.log(addExpenses[i]);
-}
-
-let start = function() {
+let money,
+    start = function() {
     do {
         money = +prompt('Ваш месячный доход?');
     } while( !isNumber(money) );
 };
 
-let showTypeOf = function(data) {
-    console.log(data, typeof(data) );
+
+
+let appData = {
+    'income' : {},
+    'addIncome' : [],
+    'expenses' : {},
+    'addExpenses' : [],
+    'deposit' : false,
+    'mission' : 1000000,
+    'period' : 12,
+    'asking' : function(){
+    let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую', '');            
+            appData.addExpenses = addExpenses.toLocaleLowerCase().split(',');
+            appData.deposit = confirm('Есть ли у вас депозит в банке?');
+            let exp = {};
+            
+            for (let i = 0; i < 2; i++) {
+                let expTitle = prompt('Введите обязательную статью расходов', '');
+                let temp = 0;
+                do {
+                    temp = +prompt('Во сколько это обойдётся?');
+                } while( !isNumber(temp) );
+                exp[expTitle] = temp;
+            }
+            appData.expenses = exp;
+    },
+    'budgetDay' : 0,
+    'budgetMonth' : 0,
+    'expensesMonth' : 0
 };
 
 start();
 
-showTypeOf(money);
-showTypeOf(income);
-showTypeOf(deposit);
+appData.budget = money;
+appData.asking();
 
-function getExpensesMonth() {
-    let sum = 0;
-    
-    for (let i = 0; i < 2; i++) {
-        if (i === 0) {
-            let expenses1 = prompt('Введите обязательную статью расходов', '');
-        } else {
-            let expenses2 = prompt('Введите обязательную статью расходов', '');
-        }
+console.log(appData.addExpenses.length);
+console.log('Период равен ' + appData.period + ' месяцев');
+console.log('Цель заработать ' + appData.mission + ' рублей');
 
-        let temp = 0;
-        do {
-            temp = +prompt('Во сколько это обойдётся?');
-        } while( !isNumber(temp) );
-        sum += temp;
-    }
-    return sum;
+
+for (let i = 0; i < appData.addExpenses.length; i++) {
+    console.log(appData.addExpenses[i]);
 }
 
-let expensesAmount = getExpensesMonth();
-
-function getAccumulatedMonth() {
-    return money - expensesAmount;
+for (const key in appData.expenses) {
+    appData.expensesMonth += appData.expenses[key];
 }
 
-let accumulatedMonth = getAccumulatedMonth();
+function getBudget() {
+    appData.budgetMonth = appData.budget - appData.expensesMonth;
+    appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+}
+
+getBudget();
 
 function getTargetMonth() {
-    return Math.ceil(mission/accumulatedMonth);
+    return Math.ceil(appData.mission/appData.budgetMonth);
 }
 
-console.log('Бюджет на месяц: ' + accumulatedMonth);
-
-let budgetDay = Math.floor(accumulatedMonth / 30);
-console.log('Бюджет на день: ' + budgetDay);
+console.log('Бюджет на месяц: ' + appData.budgetMonth);
+console.log('Бюджет на день: ' + appData.budgetDay);
 
 let realPeriod = getTargetMonth();
 if (realPeriod >= 0) {
@@ -81,11 +82,11 @@ if (realPeriod >= 0) {
 }
 
 let getStatusIncome = function() {
-    if (budgetDay > 1200) {
+    if (appData.budgetDay > 1200) {
         return 'У вас высокий уровень дохода';
-    } else if (budgetDay > 600) {
+    } else if (appData.budgetDay > 600) {
         return 'У вас средний уровень дохода';
-    } else if (budgetDay > 0) {
+    } else if (appData.budgetDay > 0) {
         return 'К сожалению у вас уровень дохода ниже среднего';
     } else {
         return 'Что то пошло не так';
@@ -93,3 +94,10 @@ let getStatusIncome = function() {
 };
 
 console.log( getStatusIncome() );
+
+console.log('Наша программа включает в себя данные:');
+for (const key in appData) {
+    if (Object.hasOwnProperty.call(appData, key)) {
+        console.log('Свойство: ' + key + ', значение: '+ appData[key]);
+    }
+}
