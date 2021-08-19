@@ -1,5 +1,62 @@
 'use strict';
 
+let btnCalc = document.getElementById('start');
+console.log(btnCalc);
+
+let btnPlus1 = document.getElementsByTagName('button')[0];
+console.log(btnPlus1);
+
+let btnPlus2 = document.getElementsByTagName('button')[1];
+console.log(btnPlus1);
+
+let checkbox = document.querySelector('#deposit-check');
+console.log(checkbox);
+
+let income = document.querySelectorAll('.additional_income-item');
+console.log(income);
+
+let budgetMonthValue = document.getElementsByClassName('budget_month-value')[0];
+console.log(budgetMonthValue);
+
+let budgetDayValue = document.getElementsByClassName('budget_day-value')[0];
+console.log(budgetDayValue);
+
+let expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0];
+console.log(expensesMonthValue);
+
+let additionaIncomeValue = document.getElementsByClassName('additional_income-value')[0];
+console.log(additionaIncomeValue);
+
+let additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0];
+console.log(additionalExpensesValue);
+
+let incomePeriodValue = document.getElementsByClassName('income_period-value')[0];
+console.log(incomePeriodValue);
+
+let targetMonthValue = document.getElementsByClassName('target_month-value')[0];
+console.log(targetMonthValue);
+
+let salaryAmount = document.querySelector('.salary-amount');
+console.log(salaryAmount);
+
+let incomeTitle = document.querySelector('.income-title');
+console.log(incomeTitle);
+
+let incomeAmount = document.querySelector('.income-amount');
+console.log(incomeAmount);
+
+let expensesTitle = document.querySelector('.expenses-title');
+console.log(expensesTitle);
+
+let expensesAmount = document.querySelector('.expenses-amount');
+console.log(expensesAmount);
+
+let additionalExpensesItem = document.querySelector('.additional_expenses-item');
+console.log(additionalExpensesItem);
+
+let targetAmount = document.querySelector('[type="range"]');
+console.log(targetAmount);
+
 let isNumber = function(n) {
     return !isNaN( parseFloat(n) ) && isFinite(n);
 };
@@ -103,32 +160,32 @@ let appData = {
     }
 };
 
-start();
-appData.budget = money;
-appData.asking();
+// start();
+// appData.budget = money;
+// appData.asking();
 
-console.log(appData.addExpenses.length);
-console.log('Период равен ' + appData.period + ' месяцев');
-console.log('Цель заработать ' + appData.mission + ' рублей');
+// console.log(appData.addExpenses.length);
+// console.log('Период равен ' + appData.period + ' месяцев');
+// console.log('Цель заработать ' + appData.mission + ' рублей');
 
-appData.getExpensesMonth();
-appData.getAccumulatedMonth();
-appData.getBudget();
+// appData.getExpensesMonth();
+// appData.getAccumulatedMonth();
+// appData.getBudget();
 
-console.log('Бюджет на месяц: ' + appData.budgetMonth);
-console.log('Бюджет на день: ' + appData.budgetDay);
+// console.log('Бюджет на месяц: ' + appData.budgetMonth);
+// console.log('Бюджет на день: ' + appData.budgetDay);
 
-if (appData.getTargetMonth() >= 0) {
-    console.log('Цель будет достигнута за ' + appData.getTargetMonth() + ' месяцев');
-} else {
-    console.log('Цель не будет достигнута');
-}
+// if (appData.getTargetMonth() >= 0) {
+//     console.log('Цель будет достигнута за ' + appData.getTargetMonth() + ' месяцев');
+// } else {
+//     console.log('Цель не будет достигнута');
+// }
 
-console.log( appData.getStatusIncome() );
+// console.log( appData.getStatusIncome() );
 
-console.log('Наша программа включает в себя данные:');
-for (const key in appData) {
-    if (Object.hasOwnProperty.call(appData, key)) {
-        console.log('Свойство: ' + key + ', значение: '+ appData[key]);
-    }
-}
+// console.log('Наша программа включает в себя данные:');
+// for (const key in appData) {
+//     if (Object.hasOwnProperty.call(appData, key)) {
+//         console.log('Свойство: ' + key + ', значение: '+ appData[key]);
+//     }
+// }
