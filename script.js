@@ -219,7 +219,7 @@ rus.forEach( function(item) {
     };
 });
 
-let sum = document.querySelectorAll('[placeholder="Сумма"]'); // Получаем все поля с Наименованием
+let sum = document.querySelectorAll('[placeholder="Сумма"]'); // Получаем все поля с Суммой
 sum.forEach( function(item) {
     item.oninput = function(){
         this.value = this.value.replace(regexNum, '');
