@@ -92,7 +92,7 @@ let appData = {
         checkbox.checked = false;
         periodSelect.value = 1;
         this.changePeriodAmount();
-        
+
         btnCalc.setAttribute('style', 'display: block;');
         btnCancel.setAttribute('style', 'display: none;');
     },
@@ -101,6 +101,10 @@ let appData = {
         textInputs.forEach(function(item) {
             item.disabled = true;
         });
+        btnPlus1.disabled = true;
+        btnPlus2.disabled = true;
+        checkbox.disabled = true;
+        
         btnCalc.setAttribute('style', 'display: none;');
         btnCancel.setAttribute('style', 'display: block;');
     },
