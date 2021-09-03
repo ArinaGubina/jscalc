@@ -276,6 +276,7 @@ class AppData {
             depositPercent.style.display = 'inline-block';
         } else {
             depositPercent.value = valueSelect;
+            depositPercent.style.display = 'none';
         }
     }
     depositHandler() {
